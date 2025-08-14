@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import ChatMessage from '@/components/ChatMessage';
 import ChatInput from '@/components/ChatInput';
 
@@ -91,9 +92,13 @@ export default function Home() {
         <header className="chat-header-container">
           <div className="chat-header-left">
             <div className="chat-header-logo">
-              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
-              </svg>
+              <Image
+                src="/booth-logo.png"
+                alt="Booth School of Business Logo"
+                width={32}
+                height={32}
+                style={{ objectFit: 'contain' }}
+              />
             </div>
             <h2 className="chat-header-title">HarperBot</h2>
           </div>
