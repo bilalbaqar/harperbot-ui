@@ -1,170 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HarperBot Chat Interface</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .chat-bubble {
-            max-width: 70%;
-            word-wrap: break-word;
-        }
-        .user-message {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 18px 18px 4px 18px;
-        }
-        .bot-message {
-            background: #f8f9fa;
-            color: #333;
-            border-radius: 18px 18px 18px 4px;
-            border: 1px solid #e9ecef;
-        }
-        .typing-indicator {
-            display: flex;
-            gap: 4px;
-            padding: 12px 16px;
-        }
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #6c757d;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
-        }
-    </style>
-</head>
-<body class="bg-gray-50 h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                <span class="text-white font-bold text-lg">H</span>
-            </div>
-            <div>
-                <h1 class="text-xl font-semibold text-gray-900">HarperBot</h1>
-                <p class="text-sm text-gray-500">AI Assistant</p>
-            </div>
-        </div>
-    </header>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
 
-    <!-- Chat Container -->
-    <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatContainer">
-        <!-- Welcome Message -->
-        <div class="flex justify-start">
-            <div class="chat-bubble bot-message p-4 shadow-sm">
-                <p class="text-sm">Hello! I'm HarperBot, your AI assistant. How can I help you today?</p>
-            </div>
-        </div>
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
-        <!-- Sample User Message -->
-        <div class="flex justify-end">
-            <div class="chat-bubble user-message p-4 shadow-sm">
-                <p class="text-sm">Hi! Can you help me with a coding question?</p>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#1b0e0e]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path></svg>
             </div>
-        </div>
-
-        <!-- Sample Bot Response -->
-        <div class="flex justify-start">
-            <div class="chat-bubble bot-message p-4 shadow-sm">
-                <p class="text-sm">Of course! I'd be happy to help you with any coding questions. What programming language or framework are you working with?</p>
+            <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">HarperBot</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#1b0e0e] text-sm font-medium leading-normal" href="#">Home</a>
+              <a class="text-[#1b0e0e] text-sm font-medium leading-normal" href="#">About</a>
+              <a class="text-[#1b0e0e] text-sm font-medium leading-normal" href="#">Contact</a>
             </div>
-        </div>
-
-        <!-- Typing Indicator -->
-        <div class="flex justify-start">
-            <div class="chat-bubble bot-message">
-                <div class="typing-indicator">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Input Area -->
-    <div class="bg-white border-t border-gray-200 p-4">
-        <div class="flex items-end space-x-3">
-            <div class="flex-1 relative">
-                <textarea 
-                    id="messageInput"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Type your message..."
-                    rows="1"
-                    style="min-height: 48px; max-height: 120px;"
-                ></textarea>
-            </div>
-            <button 
-                id="sendButton"
-                class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-[#f3e7e7] text-[#1b0e0e] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
             >
-                Send
+              <div class="text-[#1b0e0e]" data-icon="Gear" data-size="20px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                  <path
+                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm88-29.84q.06-2.16,0-4.32l14.92-18.64a8,8,0,0,0,1.48-7.06,107.21,107.21,0,0,0-10.88-26.25,8,8,0,0,0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186,40.54a8,8,0,0,0-3.94-6,107.71,107.71,0,0,0-26.25-10.87,8,8,0,0,0-7.06,1.49L130.16,40Q128,40,125.84,40L107.2,25.11a8,8,0,0,0-7.06-1.48A107.6,107.6,0,0,0,73.89,34.51a8,8,0,0,0-3.93,6L67.32,64.27q-1.56,1.49-3,3L40.54,70a8,8,0,0,0-6,3.94,107.71,107.71,0,0,0-10.87,26.25,8,8,0,0,0,1.49,7.06L40,125.84Q40,128,40,130.16L25.11,148.8a8,8,0,0,0-1.48,7.06,107.21,107.21,0,0,0,10.88,26.25,8,8,0,0,0,6,3.93l23.72,2.64q1.49,1.56,3,3L70,215.46a8,8,0,0,0,3.94,6,107.71,107.71,0,0,0,26.25,10.87,8,8,0,0,0,7.06-1.49L125.84,216q2.16.06,4.32,0l18.64,14.92a8,8,0,0,0,7.06,1.48,107.21,107.21,0,0,0,26.25-10.88,8,8,0,0,0,3.93-6l2.64-23.72q1.56-1.48,3-3L215.46,186a8,8,0,0,0,6-3.94,107.71,107.71,0,0,0,10.87-26.25,8,8,0,0,0-1.49-7.06Zm-16.1-6.5a73.93,73.93,0,0,1,0,8.68,8,8,0,0,0,1.74,5.48l14.19,17.73a91.57,91.57,0,0,1-6.23,15L187,173.11a8,8,0,0,0-5.1,2.64,74.11,74.11,0,0,1-6.14,6.14,8,8,0,0,0-2.64,5.1l-2.51,22.58a91.32,91.32,0,0,1-15,6.23l-17.74-14.19a8,8,0,0,0-5-1.75h-.48a73.93,73.93,0,0,1-8.68,0,8,8,0,0,0-5.48,1.74L100.45,215.8a91.57,91.57,0,0,1-15-6.23L82.89,187a8,8,0,0,0-2.64-5.1,74.11,74.11,0,0,1-6.14-6.14,8,8,0,0,0-5.1-2.64L46.43,170.6a91.32,91.32,0,0,1-6.23-15l14.19-17.74a8,8,0,0,0,1.74-5.48,73.93,73.93,0,0,1,0-8.68,8,8,0,0,0-1.74-5.48L40.2,100.45a91.57,91.57,0,0,1,6.23-15L69,82.89a8,8,0,0,0,5.1-2.64,74.11,74.11,0,0,1,6.14-6.14A8,8,0,0,0,82.89,69L85.4,46.43a91.32,91.32,0,0,1,15-6.23l17.74,14.19a8,8,0,0,0,5.48,1.74,73.93,73.93,0,0,1,8.68,0,8,8,0,0,0,5.48-1.74L155.55,40.2a91.57,91.57,0,0,1,15,6.23L173.11,69a8,8,0,0,0,2.64,5.1,74.11,74.11,0,0,1,6.14,6.14,8,8,0,0,0,5.1,2.64l22.58,2.51a91.32,91.32,0,0,1,6.23,15l-14.19,17.74A8,8,0,0,0,199.87,123.66Z"
+                  ></path>
+                </svg>
+              </div>
             </button>
-        </div>
-    </div>
-
-    <script>
-        const chatContainer = document.getElementById('chatContainer');
-        const messageInput = document.getElementById('messageInput');
-        const sendButton = document.getElementById('sendButton');
-
-        // Auto-resize textarea
-        messageInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-        });
-
-        // Send message on Enter (but allow Shift+Enter for new line)
-        messageInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
-        });
-
-        // Send message on button click
-        sendButton.addEventListener('click', sendMessage);
-
-        function sendMessage() {
-            const message = messageInput.value.trim();
-            if (!message) return;
-
-            // Add user message
-            addMessage(message, 'user');
-            messageInput.value = '';
-            messageInput.style.height = 'auto';
-
-            // Simulate bot response
-            setTimeout(() => {
-                addMessage('Thanks for your message! I\'m processing your request...', 'bot');
-            }, 1000);
-        }
-
-        function addMessage(content, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `flex justify-${sender === 'user' ? 'end' : 'start'}`;
-            
-            const bubbleClass = sender === 'user' ? 'user-message' : 'bot-message';
-            messageDiv.innerHTML = `
-                <div class="chat-bubble ${bubbleClass} p-4 shadow-sm">
-                    <p class="text-sm">${content}</p>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB7zPPlMtR2GZ99oR1BMOFTUY_n__FhwIPkxImW7wYxSI8vCwF0KqOLwARxjDhuzKXq_LcfjPdQADRg6fLTskcKICnK0WGVjmVuo_FbeS1FeK36RSuosHeRj26tjJMr-8Vovuh4z0zi2ZkB4Y6n6NkOm_Ek6sTb_jR-y7sXDnDr0U-efsnPYPt9i6DmkEPcaDNNVzYjStVCINPcqRrWFHQujIJKVkJXBOKLK5EzcXo3irG1BOQmWs_NPnoe239mOIg5LnrLrOubrA");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex gap-3 p-4">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqsy30THQs_x3NsMVN23jyE8R4Pj_OfvK6XA7IKmPrQ0c4jadYqOlLmWpcjmxlDFYG0nyTC3vAoRsbK53_KlofoMQUJxl6oaUmZCmYxjHt71zw6XDEm6ipU65ZDqa1j7URgUfhxYaXnJ9kpHKQh2gvGiujaAT689eOC0eBsmeLhzrVko-A2oDvOQf5jYX8hStaKwhCThd9lR-mTBPPlCiggOezJ1w_x-Myza-mqtdqelbo_c3nUdVEnpEOesEDdZFuneyPWpI5pw");'
+              ></div>
+              <div class="flex flex-1 flex-col items-stretch gap-2">
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-[#1b0e0e] text-base font-bold leading-tight">HarperBot</p>
+                    <p class="text-[#974e4e] text-sm font-normal leading-normal">10:00 AM</p>
+                  </div>
+                  <p class="text-[#1b0e0e] text-base font-normal leading-normal">Hello! I'm HarperBot, your AI assistant for Booth students. How can I help you today?</p>
                 </div>
-            `;
-            
-            chatContainer.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // Scroll to bottom on load
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    </script>
-</body>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDG83S-ezdP8U69NaGLeyHf9o3GmDe0xKafkgDAfnjyU1DTcj3KXn0OoBRCqAc4ipLPrEftfIoiODq7FNvpiIe3mQXTDseusQLPOapLal6s5fWo2hh1kaCiLxA8Iytw4CQFnzMyo2amgwlKM6wDqFqVD7kaj2bAc3VCLx-LrycZW27sTfdvnPJIHFl1K90-mYPKRYuLL9cIt76wm6VEWE5vJu5dcUNunj9yoTkoeya52SHFyECp_5ygCxzCQXD2onQWcsThDKrbfQ");'
+              ></div>
+              <div class="flex flex-1 flex-col items-stretch gap-2">
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-[#1b0e0e] text-base font-bold leading-tight">Student</p>
+                    <p class="text-[#974e4e] text-sm font-normal leading-normal">10:05 AM</p>
+                  </div>
+                  <p class="text-[#1b0e0e] text-base font-normal leading-normal">Hi HarperBot, can you tell me about the upcoming career fair?</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXi3bEtCNY3Emtl1_zduo1vbpizc1SH5pT0tWIuFAKuwDK9W9wuHM_FEKRDX_r4iFIHKevKNLQWTzR7KiL1778P_dTQGSk3sJaeGx21crVHiXqtKz_K2fyKwboYNnLqGBxNQEhgymgTk_luKLBtjG2Glkg6TlhLffflQ8LUy037N_M5b-6nDPIL0Vlc2LdzF6_hOA4jitLOKWzVIUF5fCTHoQLMBZGY0kdB1wYM-ReR7vRdefH8ndTbYVLpTJAEF0Dv-1nvlGItg");'
+              ></div>
+              <div class="flex flex-1 flex-col items-stretch gap-2">
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-[#1b0e0e] text-base font-bold leading-tight">HarperBot</p>
+                    <p class="text-[#974e4e] text-sm font-normal leading-normal">10:10 AM</p>
+                  </div>
+                  <p class="text-[#1b0e0e] text-base font-normal leading-normal">
+                    Certainly! The Booth Career Fair is scheduled for October 26th and 27th. It will be held at the Gleacher Center. Over 100 companies will be participating,
+                    offering opportunities in various fields such as finance, consulting, and technology. You can find a detailed list of participating companies and their profiles
+                    on the Career Services website.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDks7kdIZU5My-aT5_W-BxX91bNu1h8gQukd0aekdBDLqVkiGjcoTKgwwi49ynMtxDJ33_wrujukNvs4AV5ILo7CQ69vaZ6eg6uQ8q2FHGWtSsIonByxTkTyG-Lb8gmKOY_7oEslC6BWmbCcs63OftUANlgO6porDNZQTArAs5O_zWtS4wiBYLMSan9k2iO-qSeM_Zf0MKQvoY7E7b-443jVhHkxy8DmisgGvZRwNiycAmAQKej4QtkymA23kgPvKUEZfus1_LLHA");'
+              ></div>
+              <div class="flex flex-1 flex-col items-stretch gap-2">
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-[#1b0e0e] text-base font-bold leading-tight">Student</p>
+                    <p class="text-[#974e4e] text-sm font-normal leading-normal">10:15 AM</p>
+                  </div>
+                  <p class="text-[#1b0e0e] text-base font-normal leading-normal">Great, thanks! Can you also give me some tips on how to prepare for the fair?</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqFskkSljGMHibbS6gnyM_Jn3XVSNuXn5acRs8iN3aw8yRmSTf-tv9Maqck651PW5y-vumZGYgM_luN8jiaMf7nzmAfZm6juNhTBSS-vuLp61wxroGY2VYtFv-c-JmjI8_aWouBSDIGsoie-CF149N9KqTR1j_bpJfj8PVZOk5JIgWByoUz9xx7KaMCOY7a-U7tsr_AaAuLVeZw-fr-QUpAqlciraGisAYStQibXHsIMmtbc3DW3p_3QMLqCoLRm2il4mTyFt29g");'
+              ></div>
+              <div class="flex flex-1 flex-col items-stretch gap-2">
+                <div class="flex flex-col gap-1">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <p class="text-[#1b0e0e] text-base font-bold leading-tight">HarperBot</p>
+                    <p class="text-[#974e4e] text-sm font-normal leading-normal">10:20 AM</p>
+                  </div>
+                  <p class="text-[#1b0e0e] text-base font-normal leading-normal">
+                    Of course! Here are some tips to help you prepare: 1. **Research Companies:** Identify companies you're interested in and learn about their mission, values, and
+                    available opportunities. 2. **Tailor Your Resume:** Customize your resume to highlight relevant skills and experiences for the specific roles you're targeting.
+                    3. **Practice Your Elevator Pitch:** Prepare a concise and compelling introduction that summarizes your background and career goals. 4. **Attend Workshops:**
+                    Take advantage of career services workshops on resume writing, interviewing, and networking. 5. **Dress Professionally:** Choose appropriate attire to make a
+                    positive first impression. 6. **Prepare Questions:** Formulate thoughtful questions to ask company representatives, demonstrating your interest and engagement.
+                    7. **Follow Up:** After the fair, send thank-you notes to the representatives you spoke with, reiterating your interest and key takeaways from your
+                    conversation.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center px-4 py-3 gap-3 @container">
+              <label class="flex flex-col min-w-40 h-12 flex-1">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                  <input
+                    placeholder="Type your message..."
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e7] focus:border-none h-full placeholder:text-[#974e4e] px-4 rounded-r-none border-r-0 pr-2 text-base font-normal leading-normal"
+                    value=""
+                  />
+                  <div class="flex border-none bg-[#f3e7e7] items-center justify-center pr-4 rounded-r-lg border-l-0 !pr-2">
+                    <div class="flex items-center gap-4 justify-end">
+                      <div class="flex items-center gap-1">
+                        <button class="flex items-center justify-center p-1.5">
+                          <div class="text-[#974e4e]" data-icon="Image" data-size="20px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                              <path
+                                d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"
+                              ></path>
+                            </svg>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
